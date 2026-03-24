@@ -50,7 +50,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         return new ArrayDequeIterator();
     }
 
-    private boolean contains(T item) {
+    boolean contains(T item) {
         for (T i : this) {
             // As a container, use the item's equals()
             if (i.equals(item)) {
@@ -62,8 +62,17 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof ArrayDeque61B other) {
+        if (obj instanceof LinkedListDeque61B other) {
             if (this.size == other.size) {
+                for (T item : this) {
+                    if (!other.contains(item)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        } else if (obj instanceof ArrayDeque61B other) {
+            if (this.size == other.size()) {
                 for (T item : this) {
                     if (!other.contains(item)) {
                         return false;
