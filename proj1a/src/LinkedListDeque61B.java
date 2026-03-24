@@ -1,4 +1,3 @@
-package deque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,26 +89,6 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     @Override
     public int size() {
         return size;
-    }
-
-    /**
-     * Return the element at the front of the deque, if it exists.
-     *
-     * @return element, otherwise {@code null}.
-     */
-    @Override
-    public T getFirst() {
-        return sentinel.next.item;
-    }
-
-    /**
-     * Return the element at the back of the deque, if it exists.
-     *
-     * @return element, otherwise {@code null}.
-     */
-    @Override
-    public T getLast() {
-        return sentinel.prev.item;
     }
 
     /**
