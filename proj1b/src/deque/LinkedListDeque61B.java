@@ -53,36 +53,21 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         return new LinkedListDequeIterator();
     }
 
-    boolean contains(T item) {
-        for (T i : this) {
-            // As a container, use the item's equals()
-            if (i.equals(item)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof LinkedListDeque61B other) {
-            if (this.size == other.size) {
-                for (T item : this) {
-                    if (!other.contains(item)) {
-                        return false;
-                    }
-                }
-                return true;
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof Deque61B<?> other) {
+            if (this.size != other.size()) {
+                return false;
             }
-        } else if (obj instanceof ArrayDeque61B other) {
-            if (this.size == other.size()) {
-                for (T item : this) {
-                    if (!other.contains(item)) {
-                        return false;
-                    }
+            for (int i = 0; i < size; i++) {
+                if (!this.get(i).equals(other.get(i))) {
+                    return false;
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
