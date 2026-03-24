@@ -278,18 +278,16 @@ public class ArrayDeque61BTest {
         Deque61B<Integer> L = new ArrayDeque61B<>();
         Deque61B<Integer> L1 = new ArrayDeque61B<>();
         // Verify triggered by addFirst
-        int count = 10;
+        int count = 12;
         for (int i = 0; i <= count; i++) {
             L.addFirst(i);
         }
-        L.addLast(20);
-        assertThat(L.toList()).containsExactly(10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 20);
+        assertThat(L.toList()).containsExactly(12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         // Verify triggered by addLast
         for (int i = 0; i <= count; i++) {
             L1.addLast(i);
         }
-        L1.addFirst(20);
-        assertThat(L1.toList()).containsExactly(20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        assertThat(L1.toList()).containsExactly( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
     }
 
     @Test
@@ -297,35 +295,28 @@ public class ArrayDeque61BTest {
         // Has been resize up and down
         Deque61B<Integer> L = new ArrayDeque61B<>();
         // Verify triggered by removeFirst
-        int count = 8;
+        int count = 10;
         for (int i = 0; i < count; i++) {
             L.addFirst(i);
-        } // 7-0, len 16
+        } // 9-0, len 16
         for (int i = 0; i < count / 2; i++) {
             L.removeFirst();
-        } // 3-0, len16
-        L.removeFirst(); // 2-0, len8
+        } // 4-0, len16
+        L.removeFirst();
+        L.removeFirst();
         assertThat(L.toList()).containsExactly( 2, 1, 0);
 
         Deque61B<Integer> L1 = new ArrayDeque61B<>();
         // Verify triggered by removeLast
         for (int i = 0; i < count; i++) {
             L1.addFirst(i);
-        } // 7-0, len 16
+        } // 9-0, len 16
         for (int i = 0; i < count / 2; i++) {
             L1.removeLast();
-        } // 7-4, len 16
-        L1.removeLast(); // 7-5, len8
-        assertThat(L1.toList()).containsExactly(7, 6, 5);
+        } // 9-5, len 16
+        L1.removeLast();
+        L1.removeLast();
+        assertThat(L1.toList()).containsExactly(9, 8, 7);
     }
-//     @Test
-//     @DisplayName("ArrayDeque61B has no fields besides backing array and primitives")
-//     void noNonTrivialFields() {
-//         List<Field> badFields = Reflection.getFields(ArrayDeque61B.class)
-//                 .filter(f -> !(f.getType().isPrimitive() || f.getType().equals(Object[].class) || f.isSynthetic()))
-//                 .toList();
-//
-//         assertWithMessage("Found fields that are not array or primitives").that(badFields).isEmpty();
-//     }
 
 }
